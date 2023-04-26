@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: postgres_db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGERS_PASSWORD: Megagican12
+      POSTGRES_URL: postgres://postgres:Megagican12@localhost:5432/mc-store
+      POSTGRES_DB: mc-store
+      POSTGRES_HOST: postgres
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgres/data
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  app:
+    container_name: app
+    build: ./
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - PORT=3000
+    command: npm start
+
+volumes:
+  node_modules:
+  db-data:
