@@ -2,22 +2,8 @@ export interface User {
   name: string;
   email: string;
   password: string;
-}
-
-export interface UpdateUser {
-  name?: string;
-  email?: string;
-  password?: string;
-}
-
-export interface UserUpdate {
-  name: string;
-  password: string;
-}
-
-export interface Pagination {
-  page: number;
-  limit: number;
+  new_password: string;
+  balance: number;
 }
 
 enum Category {
@@ -35,13 +21,14 @@ export interface Product {
   stock: number;
   weight: number;
   description: string;
-  rating: number;
   image: string;
 }
 
 export interface ProductUpdate {
   title?: string;
   price?: number;
+  stock?: number;
+  weight?: number;
   category?: Category;
   description?: string;
   image?: string;

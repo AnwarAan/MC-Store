@@ -1,47 +1,11 @@
-import repositories from "./repositories.js";
+import Users from "./repositories.js";
 import AppError from "../../utils/app-error.js";
-import { Pagination } from "../../utils/interface.js";
 import { Op } from "sequelize";
 
-class QueryUserMongoose {
-  public user = new repositories.UserMongoose();
+export default class QueryUser {
+  public user = new Users();
   constructor() {
-    this.user = new repositories.UserMongoose();
-  }
-
-  async getUsers() {
-    const data = await this.user.findManyUser();
-    if (data.length === 0) throw new AppError("Data Empty", 404);
-    return data;
-  }
-
-  async getUserPagination(query: Pagination) {
-    const { page, limit } = query;
-    const pages = (page - 1) * limit;
-    const { count, result } = await this.user.findAndCountAllUser(pages, limit);
-    if (result.length === 0) throw new AppError("Data Empty", 404);
-    const meta: any = { page: page, limit: limit, totalData: count, totalPage: Math.ceil(count / limit) };
-    return { result, meta };
-  }
-
-  async getUserById(userId: string) {
-    const params = { _id: userId };
-    const data = await this.user.findOneUser(params);
-    if (data.length === 0) throw new AppError("User Not Found", 404);
-    return data;
-  }
-
-  async getUserByEmail(email: string) {
-    const params = { email: email };
-    const data = await this.user.findOneUser(params);
-    return data;
-  }
-}
-
-class QueryUserSequelize {
-  public user = new repositories.UserSequelize();
-  constructor() {
-    this.user = new repositories.UserSequelize();
+    this.user = new Users();
   }
 
   async getUsers() {
@@ -71,8 +35,6 @@ class QueryUserSequelize {
       totalData: data.count,
       totalPage: Math.ceil(data.count / limitInt),
     };
-    console.log(name);
-    console.log(params);
     return { row, meta };
   }
 
@@ -89,5 +51,3 @@ class QueryUserSequelize {
     return data;
   }
 }
-
-export default { QueryUserMongoose, QueryUserSequelize };

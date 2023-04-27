@@ -1,12 +1,12 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
+import QueryUser from "./query-domain.js";
+import CommandUser from "./command-domain.js";
 import tryCatch from "../../utils/try-catch.js";
-import utils from "../../utils/utils.js";
-import queryDomain from "./query-domain.js";
-import commandDomain from "./command-domain.js";
 import schema from "./model-sequelize.js";
+import utils from "../../utils/utils.js";
 
-const query = new queryDomain.QueryUserSequelize();
-const command = new commandDomain.commadnUserSequelize();
+const query = new QueryUser();
+const command = new CommandUser();
 
 const getUsers = tryCatch(async (req: Request, res: Response) => {
   const response = await query.getUsers();

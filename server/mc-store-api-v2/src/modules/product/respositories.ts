@@ -1,7 +1,7 @@
 import product from "../../models/product.js";
 
 export default class Products {
-  async findManyProduct(params: any) {
+  async findProduct(params: any) {
     const result = await product.findAll(params);
     return result;
   }
@@ -11,27 +11,17 @@ export default class Products {
     return result;
   }
 
-  async findOneProduct(params: any) {
-    const result = await product.findOne();
-    return result;
-  }
-
-  async insertOneProduct(data: any) {
+  async insertProduct(data: any) {
     const result = await product.create(data);
     return result;
   }
 
-  async updateOneProduct(data: any, params: any) {
+  async updateProduct(data: any, params: any) {
     const result = await product.update(data, params);
     return result;
   }
 
-  async deleteManyProduct(params: any) {
-    const result = await product.destroy(params);
-    return result;
-  }
-
-  async deleteOneProduct(params: any) {
+  async deleteProduct(params: any) {
     const result = await product.destroy(params);
     return result;
   }

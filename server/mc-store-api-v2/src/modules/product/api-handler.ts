@@ -16,7 +16,7 @@ const getProducts = tryCatch(async (req: Request, res: Response, next: NextFunct
 const getProductPagination = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
   const search = req.query;
   const response = await query.getProductPagination(search);
-  return utils.responseSuccess(res, response.data, "Success Get Product", 200, response.meta);
+  return utils.responseSuccess(res, response.row, "Success Get Product", 200, response.meta);
 });
 
 const getProductById = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
