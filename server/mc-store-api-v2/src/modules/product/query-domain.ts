@@ -27,7 +27,8 @@ export default class QueryProducts {
       params = { offset: (pageInt - 1) * limitInt, limit: limitInt };
     }
     const data: any = await this.product.findAndCountAllProduct(params);
-    if (data.length === 0) throw new AppError("Data Empty", 404);
+    console.log(data);
+    if (data.rows.length === 0) throw new AppError("Data Empty", 404);
     const meta = { page: pageInt, limit: limitInt, totalData: data.count, totalPage: Math.ceil(data.count / limitInt) };
     const row = data.rows;
     return { row, meta };
