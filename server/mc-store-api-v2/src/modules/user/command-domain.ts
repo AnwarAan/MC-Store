@@ -16,25 +16,24 @@ export default class CommandUser {
   async registerUser(payload: User) {
     const { name, email, password, balance } = payload;
     const checkEmail = await this.query.getUserByEmail(email);
-    console.log(checkEmail);
     if (checkEmail.length !== 0) throw new AppError("Email has Already", 403);
     const hashPassword = await bcrypt.hashingPassword(password);
     const userData = { name: name, email: email, password: hashPassword, balance: balance };
-    await this.user.insertOneUser(userData);
+    const data = await this.user.insertOneUser(userData);
+    return data;
   }
 
   async loginUser(payload: User) {
     const { email, password } = payload;
     const validateEmail = email.toLowerCase();
     const checkUser: any = await this.query.getUserByEmail(validateEmail);
+    if (checkUser.length === 0) throw new AppError("Email not Found", 401);
     const userData = checkUser[0].dataValues;
-    if (checkUser === null) throw new AppError("Email not Found", 403);
     const checkPassword = await bcrypt.comparePassword(password, userData.password);
-    if (!checkPassword) throw new AppError("Password not Match", 403);
+    if (!checkPassword) throw new AppError("Password not Match", 401);
     const data = {
       userId: userData.user_id,
     };
-    console.log(data);
     const secret: any = process.env.SECRET_KEY;
     const token = jwt.sign(data, secret, { expiresIn: "1h" });
     const responseData = {
@@ -50,7 +49,6 @@ export default class CommandUser {
     const { name, password, new_password, balance } = payload;
     const params = { where: { user_id: userId } };
     const getUser: any = await this.query.getUserById(userId);
-    console.log(payload);
     const userData = getUser[0].dataValues;
     let updateData: any = {};
     if (userData.name !== name) {
@@ -73,9 +71,8 @@ export default class CommandUser {
   }
 
   async deleteUsers() {
-    const params = { truncate: true };
-    const data = await this.user.deleteUser(params);
-    console.log(data);
+    const params = { truncate: { cascade: true } };
+    await this.user.deleteUser(params);
   }
 
   async deletOneUser(userId: string) {

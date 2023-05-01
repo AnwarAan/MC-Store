@@ -4,6 +4,7 @@ export const counterSlice = createSlice({
   name: "counter",
   initialState: {
     count: 1,
+    bill: 0,
   },
 
   reducers: {
@@ -16,8 +17,11 @@ export const counterSlice = createSlice({
     increaseByAmount: (state, action: PayloadAction<number>) => {
       state.count = action.payload;
     },
+    getBill: (state, action: PayloadAction<number>) => {
+      state.count = action.payload;
+    },
   },
 });
 
-export const { increase, decrease, increaseByAmount } = counterSlice.actions;
+export const { increase, decrease, increaseByAmount, getBill } = counterSlice.actions;
 export default counterSlice.reducer;

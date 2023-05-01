@@ -10,11 +10,12 @@ const ProductDetail = () => {
   const dispatch = useAppDispatch();
   const { productReducer } = useAppSelector((state) => state);
   const { product } = productReducer;
+  const basicAuth = { auth: { username: "mcnwr", password: "mcnwr76" } };
   const { id } = useParams();
   const link: string = `http://localhost:3000/v2/product/${id}`;
   const getProduct = async () => {
     try {
-      const data = await api.getProductAPI(link);
+      const data = await api.getAPI(link, basicAuth);
       dispatch(getOneProduct(data.data.data[0]));
     } catch (error: any) {
       dispatch(responseFail(error.response.data));

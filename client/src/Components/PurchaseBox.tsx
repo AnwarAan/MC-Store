@@ -7,8 +7,9 @@ const PurchaseBox: React.FunctionComponent = () => {
   const { productReducer, counterReducer } = useAppSelector((state) => state);
   const { count } = counterReducer;
   const { product } = productReducer;
-  const { price } = product;
+  const { price, product_id } = product;
   const subTotal = price * count;
+
   return (
     <Fragment>
       <div className="fl w-100">
@@ -25,7 +26,7 @@ const PurchaseBox: React.FunctionComponent = () => {
             <Link to="/cart">
               <button className="fl w-100 h2 mb1 br3 pointer bg-green ba b--green white f4 lh-copy">+ Cart</button>
             </Link>
-            <Link to={`/buy/${product.product_id}`}>
+            <Link to={`/buy/${product_id}`}>
               <button className="fl w-100 h2 mb2 br3 pointer ba b--green green f4 lh-copy">Buy</button>
             </Link>
           </div>

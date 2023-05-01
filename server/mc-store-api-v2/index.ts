@@ -12,6 +12,7 @@ import notFound from "./src/utils/not-found.js";
 //Router
 import userRoutes from "./src/routes/user.js";
 import productRoutes from "./src/routes/product.js";
+import cartRouter from "./src/routes/cart.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -28,6 +29,7 @@ app.use(cors());
 //Router
 app.use("/v2/user", userRoutes);
 app.use("/v2/product", productRoutes);
+app.use("/v2/cart", cartRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));

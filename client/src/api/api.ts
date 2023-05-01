@@ -1,8 +1,18 @@
 import axios from "axios";
 
-const getProductAPI = async (url: string) => {
-  const response = await axios.get(url, { auth: { username: "mcnwr", password: "mcnwr76" } });
+const getAPI = async (url: string, auth: object) => {
+  const response = await axios.get(url, auth);
   return response;
 };
 
-export default { getProductAPI };
+const postAPI = async (url: string, data: any) => {
+  const response = await axios.post(url, data);
+  return response;
+};
+
+const updateAPI = async (url: string, data: any) => {
+  const result = await axios.put(url, data);
+  return result;
+};
+
+export default { getAPI, postAPI, updateAPI };

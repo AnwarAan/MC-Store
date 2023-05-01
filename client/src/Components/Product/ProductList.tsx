@@ -19,9 +19,10 @@ const CardList: React.FunctionComponent = () => {
   const { products, getProductFail } = productReducer;
   const dispatch = useAppDispatch();
   const link: string = "http://localhost:3000/v2/product";
+  const basicAuth = { auth: { username: "mcnwr", password: "mcnwr76" } };
   const getAllProducts = async () => {
     try {
-      const data: AxiosResponse<any, any> = await api.getProductAPI(link);
+      const data: AxiosResponse<any, any> = await api.getAPI(link, basicAuth);
       return dispatch(getProducts(data.data.data));
     } catch (error: any) {
       dispatch(responseFail(error.response.data));

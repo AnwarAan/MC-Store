@@ -23,6 +23,7 @@ const getProductById = tryCatch(async (req: Request, res: Response, next: NextFu
   const params = req.params.productId;
   await utils.validateSchema(params, schema.checkProductId);
   const response = await query.getProductById(params);
+  console.log(req);
   return utils.responseSuccess(res, response, "Success Get Product");
 });
 

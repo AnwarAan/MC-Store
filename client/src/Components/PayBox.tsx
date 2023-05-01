@@ -1,27 +1,20 @@
-import React, { Fragment } from "react";
-import { useAppSelector } from "../redux/hook";
+import React, { Fragment, useEffect } from "react";
 
-const PayBox: React.FunctionComponent = () => {
-  const { productReducer, counterReducer, shippingReducer } = useAppSelector((state) => state);
-  const { count } = counterReducer;
-  const { product } = productReducer;
-  const { price, weight } = product;
-  const { shipping } = shippingReducer;
-  const totalPrice = count * price;
-  const totalWeight = weight * count;
-  const convertWeight = totalWeight / 1000;
-  const shippingInsurance = 1;
+interface OnClick {
+  totalPrice: number;
+  shippingCharge: number;
+  shippingInsurance: number;
+  totalBill: number;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
 
-  let shippingCharge;
-  if (shipping === "Same Day") {
-    shippingCharge = 5;
-  } else if (shipping === "Next Day") {
-    shippingCharge = 3;
-  } else {
-    shippingCharge = 1 * Math.ceil(convertWeight);
-  }
-
-  const totalBill = totalPrice + shippingCharge + shippingInsurance;
+const PayBox: React.FunctionComponent<OnClick> = ({
+  totalPrice,
+  shippingCharge,
+  shippingInsurance,
+  totalBill,
+  onClick,
+}) => {
   return (
     <Fragment>
       <div>
@@ -35,7 +28,7 @@ const PayBox: React.FunctionComponent = () => {
           <div>
             <div className="flex justify-between h2">
               <p>Total Price</p>
-              <p>${count * price}</p>
+              <p>${totalPrice}</p>
             </div>
             <div className="flex justify-between h2">
               <p>Shipping Charges</p>
@@ -52,7 +45,9 @@ const PayBox: React.FunctionComponent = () => {
           </div>
         </div>
         <div className="ml3 mr3">
-          <button className="fl w-100 h2 mb3 ba br3 b--green white bg-green pointer">Pay</button>
+          <button className="fl w-100 h2 mb3 ba br3 b--green white bg-green pointer" onClick={onClick}>
+            Pay
+          </button>
         </div>
       </div>
     </Fragment>

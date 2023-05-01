@@ -6,6 +6,8 @@ export const sequelize = new Sequelize(postgresUri);
 const postgresConnection = async () => {
   try {
     sequelize.sync();
+    // sequelize.sync({ force: true });
+    // sequelize.sync({ alter: true });
     await sequelize.authenticate();
     console.log("Success Connect Postgres");
   } catch (error) {
