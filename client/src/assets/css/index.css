@@ -1,0 +1,13 @@
+.login:hover {
+    background-color: #19A974;
+    color: white;
+}
+
+.register:hover {
+    background-color: white;
+    color: #19A974;
+}
+
+.noUnderline {
+    text-decoration: none;
+}
