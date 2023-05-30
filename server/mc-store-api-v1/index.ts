@@ -10,6 +10,7 @@ import notFound from './src/utils/not-found.js';
 import userRoutes from './src/routes/user.js';
 import productRoutes from './src/routes/product.js';
 import orderRoutes from './src/routes/order.js';
+import carRoutes from './src/routes/cart.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,7 @@ mongooseConnection();
 app.use('/v1/user', userRoutes);
 app.use('/v1/product', productRoutes);
 app.use('/v1/order', orderRoutes);
+app.use('/v1/cart', carRoutes);
 
 app.use(errorHandler);
 app.use(notFound);

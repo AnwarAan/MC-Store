@@ -2,7 +2,6 @@ import order from '../../models/order.js';
 
 export default class Orders {
   async findOrder(params: any) {
-    // const result = await order.find(params).populate('product');
     const result = await order.find().populate('product');
     return result;
   }
