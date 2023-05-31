@@ -45,7 +45,7 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts --openssl-legacy-provider start",
+    "start": "PORT=3001 react-scripts --openssl-legacy-provider start",
     "build": "set BUILD_PATH=../server/public&& react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

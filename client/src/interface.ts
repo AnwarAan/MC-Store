@@ -11,16 +11,16 @@ export interface ResponseFail {
 }
 
 enum Category {
-  electronic = "electronic",
-  food = "food",
-  beverag = "beverage",
-  fashion = "fashion",
-  accessories = "accessories",
+  electronic = 'electronic',
+  food = 'food',
+  beverag = 'beverage',
+  fashion = 'fashion',
+  accessories = 'accessories',
 }
 
 export interface Product {
-  product_id: number;
-  title: string;
+  _id: number;
+  name: string;
   price: number;
   category: string | Category;
   stock: number;
@@ -30,14 +30,53 @@ export interface Product {
   image: string;
 }
 
+export interface Products {
+  product: Product[];
+}
+
 export interface ProductProps {
-  product_id?: number;
-  title?: string;
-  price?: number;
-  category?: string | Category;
-  stock?: number;
-  weight?: number;
-  description?: string;
-  rating?: number;
-  image?: string;
+  product: {
+    _id: number;
+    name: string;
+    price: number;
+    category: string | Category;
+    stock: number;
+    weight: number;
+    description: string;
+    rating: number;
+    image: string;
+  };
+}
+
+export interface Item {
+  _id: string;
+  product: Product;
+  quantity: number;
+  price: number;
+  total: number;
+}
+
+export interface ItemProps {
+  item: {
+    _id: string;
+    product: Product;
+    quantity: number;
+    price: number;
+    total: number;
+  };
+}
+
+export interface Cart {
+  _id: string;
+  user: string;
+  item: Item[];
+  subTotal: number;
+}
+
+export interface Carts {
+  cart: Cart[];
+}
+
+export interface CartsProps {
+  cart: Cart[];
 }

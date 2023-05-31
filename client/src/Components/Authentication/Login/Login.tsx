@@ -1,44 +1,78 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
+import { postAPI, url } from '../../../api/api';
+import images from '../../../assets/images';
 
 const Login = () => {
-	return (
-		<div className="tc">
-			<div className="flex justify-center mt6">
-				<div style={{ height: "400px", width: "400px" }} className="br3 shadow-2">
-					<form className="">
-						<div className="flex flex-column mt4">
-							<div>
-								<label>Username</label>
-							</div>
-							<div className="mt2">
-								<input style={{ height: "30px" }} className="w-60 br3 ba b--light-gray" />
-							</div>
-							<div className="mt4">
-								<label>Password</label>
-							</div>
-							<div className="mt2">
-								<input style={{ height: "30px" }} className="w-60 br3 ba b--light-gray" />
-							</div>
-						</div>
-						<button style={{ height: "30px", width: "90px" }} className="register br3 ba b--light-gray bg-green white pointer mt4" type="submit">
-							Submit
-						</button>
-					</form>
-					<div className="flex flex-column mt5">
-						<span>Have not Account</span>
-						<div className="mt2">
-							<Link to="/register">
-								<button style={{ height: "30px", width: "90px" }} className="register br3 ba b--light-gray bg-green white pointer">
-									Register
-								</button>
-							</Link>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const getEmail = (e: any) => {
+    setEmail(e.target.value);
+  };
+
+  const getPassword = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    const data = {
+      email: email,
+      password: password,
+    };
+    await login(data);
+  };
+
+  const login = async (data: any) => {
+    try {
+      const user = await postAPI(`${url}/user/login`, data);
+      window.localStorage.setItem('token', user.data.data.token);
+      window.localStorage.setItem('user', user.data.data._id);
+      history.back();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <div className="">
+      <Form
+        style={{ height: '450px', width: '400px' }}
+        className="container tc col col-lg-6 mt6 shadow-2 br3"
+        onSubmit={onSubmit}>
+        <div className="pt5">
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control className="w-80 m-auto" type="email" placeholder="batman@mail.com" onChange={getEmail} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control className="w-80 m-auto" type="password" placeholder="123456" onChange={getPassword} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <div>
+              <button className="register size-m ba br3 mt3" type="submit">
+                Submit
+              </button>
+            </div>
+            <div className="mt4">
+              <p className="mb2">Have not Account</p>
+              <button className="register size-m ba br3" type="submit">
+                Register
+              </button>
+            </div>
+          </Form.Group>
+        </div>
+        <div style={{ position: 'relative', display: '', marginTop: '-410px', marginLeft: '360px' }} className="flex">
+          <Link to="/">
+            <img style={{ width: '12px' }} src={images.close} />
+          </Link>
+        </div>
+      </Form>
+    </div>
+  );
 };
 
 export default Login;

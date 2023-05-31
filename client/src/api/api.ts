@@ -1,16 +1,18 @@
-import axios from "axios";
+import axios from 'axios';
 
-const getAPI = async (url: string, auth: object) => {
-  const response = await axios.get(url, auth);
+export const url = 'http://localhost:3000/v1';
+
+export const getAPI = async (url: string) => {
+  const response = await axios.get(url);
   return response;
 };
 
-const postAPI = async (url: string, data: any) => {
+export const postAPI = async (url: string, data: any) => {
   const response = await axios.post(url, data);
   return response;
 };
 
-const updateAPI = async (url: string, data: any) => {
+export const updateAPI = async (url: string, data: any) => {
   const result = await axios.put(url, data);
   return result;
 };
