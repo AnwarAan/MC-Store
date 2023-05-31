@@ -14,7 +14,7 @@ const getAllProduct = tryCatch(async (req: Request, res: Response, next: NextFun
 });
 
 const getAllProductPagination = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
-  const payload = req.query;
+  const payload: any = req.query;
   const response = await query.getAllProductPagination(payload);
   return utils.responseSuccess(res, response.rows, 'Success Get Product', 200, response.meta);
 });
@@ -42,12 +42,12 @@ const updateProduct = tryCatch(async (req: Request, res: Response, next: NextFun
   return utils.responseSuccess(res, response, 'Success Update Product');
 });
 
-const deleteAllProduct = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
+const deleteProducts = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
   const response = await command.deleteProducts();
   return utils.responseSuccess(res, response, 'Success Delete Product');
 });
 
-const deleteProductById = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
+const deleteProduct = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
   const params = req.params.productId;
   await utils.validateSchema(params, schema.checkProductId);
   const response = await command.deleteProduct(params);
@@ -60,6 +60,6 @@ export default {
   getProductById,
   addProduct,
   updateProduct,
-  deleteAllProduct,
-  deleteProductById,
+  deleteProducts,
+  deleteProduct,
 };

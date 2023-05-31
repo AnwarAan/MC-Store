@@ -1,5 +1,6 @@
 import AppError from '../../utils/app-error.js';
 import Users from './repositories.js';
+import { UserPage } from '../../utils/interface.js';
 
 export default class QueryUser {
   public user = new Users();
@@ -14,11 +15,11 @@ export default class QueryUser {
     return result;
   }
 
-  async getUserPagination(payload: any) {
+  async getUserPagination(payload: UserPage) {
     const { page, limit } = payload;
     let { name } = payload;
-    const limitInt = parseInt(limit) || 10;
-    const pageInt = parseInt(page) || 1;
+    const limitInt = Number(limit) || 10;
+    const pageInt = Number(page) || 1;
     const pages = (pageInt - 1) * limitInt;
     let params = {};
     if (name !== undefined) {

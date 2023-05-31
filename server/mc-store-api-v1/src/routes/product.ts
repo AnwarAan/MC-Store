@@ -11,7 +11,7 @@ router.post('/', apiHandler.addProduct);
 
 router.put('/:productId', apiHandler.updateProduct);
 
-router.delete('/', apiHandler.deleteAllProduct);
-router.delete('/:productId', apiHandler.deleteProductById);
+router.delete('/', apiHandler.deleteProducts);
+router.delete('/:productId', apiHandler.deleteProduct);
 
 export default router;

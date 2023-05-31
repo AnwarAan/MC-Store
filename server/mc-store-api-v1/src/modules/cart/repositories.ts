@@ -1,14 +1,15 @@
 import cart from '../../models/cart.js';
+import { Cart } from '../../utils/interface.js';
 
 export default class Carts {
-  async findCart(params: any) {
+  async findCart(params: object) {
     const result = await cart.find(params).populate({
       path: 'item.product',
     });
     return result;
   }
 
-  async findOneCart(params: any) {
+  async findOneCart(params: object) {
     const result = await cart
       .find(params)
       .populate({
@@ -18,7 +19,7 @@ export default class Carts {
     return result;
   }
 
-  async insertOneCart(data: any) {
+  async insertOneCart(data: Cart) {
     const argument = new cart(data);
     const result = await argument.save();
     return result;
@@ -29,7 +30,7 @@ export default class Carts {
     return result;
   }
 
-  async deleteOneCart(params: any) {
+  async deleteOneCart(params: object) {
     const result = await cart.deleteOne(params);
     return result;
   }

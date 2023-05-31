@@ -1,5 +1,6 @@
 import Products from './repositories.js';
 import QueryProduct from './query-domain.js';
+import { Product, ProductUpdate } from '../../utils/interface.js';
 
 export default class CommandProduct {
   public product = new Products();
@@ -9,17 +10,17 @@ export default class CommandProduct {
     this.query = new QueryProduct();
   }
 
-  async addProduct(payload: any) {
+  async addProduct(payload: Product) {
     const { name, price, description, stock, weight, image } = payload;
     const data = { name: name, price: price, description: description, stock: stock, weight: weight, image: image };
     await this.product.insertOneProduct(data);
   }
 
-  async updateProduct(productId: string, payload: any) {
+  async updateProduct(productId: string, payload: Product) {
     const params = { _id: productId };
     const { name, price, description, stock, weight, image } = payload;
     const getProduct = await this.query.getProductById(productId);
-    let updateData: any = {};
+    let updateData: ProductUpdate = {};
     if (name !== getProduct[0].name) {
       updateData.name = name;
     }

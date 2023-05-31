@@ -1,6 +1,7 @@
 import Carts from './repositories.js';
 import QueryCart from './query-domain.js';
 import QueryProduct from '../product/query-domain.js';
+import { Cart } from '../../utils/interface.js';
 
 export default class CommandCart {
   public cart = new Carts();
@@ -12,12 +13,13 @@ export default class CommandCart {
     this.queryProduct = new QueryProduct();
   }
 
-  async addCart(payload: any) {
-    const { productId, quantity } = payload.item[0];
+  async addCart(payload: Cart) {
+    const { productId } = payload.item[0];
     const { userId } = payload;
+    const quantity: number = payload.item[0].quantity;
     const product: any = await this.queryProduct.getProductById(productId);
     const price = product[0].price;
-    const quantityInt = parseInt(quantity);
+    const quantityInt = Number(quantity);
     const total = price * quantityInt;
     let cart: any = await this.query.getCartByUserId(userId);
     if (cart.length !== 0) {
@@ -49,10 +51,10 @@ export default class CommandCart {
       await cart[0].save();
     } else if (quantity > 0) {
       const data = {
-        user: userId,
+        userId: userId,
         item: [
           {
-            product: productId,
+            productId: productId,
             price: price,
             quantity: quantityInt,
             total: total,
@@ -64,12 +66,12 @@ export default class CommandCart {
     }
   }
 
-  async deleteCartById(cardId: string) {
+  async deleteCart(cardId: string) {
     const params = { _id: cardId };
     await this.cart.deleteOneCart(params);
   }
 
-  async deleteAllCart() {
+  async deleteCarts() {
     await this.cart.deleteManyCart();
   }
 }

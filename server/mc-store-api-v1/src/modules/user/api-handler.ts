@@ -14,7 +14,7 @@ const getAllUser = tryCatch(async (req: Request, res: Response, next: NextFuncti
 });
 
 const getAllUserPagination = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
-  const payload = req.query;
+  const payload: any = req.query;
   const response = await query.getUserPagination(payload);
   return utils.responseSuccess(res, response.rows, 'Success Get User', 200, response.meta);
 });
@@ -49,12 +49,12 @@ const updateUser = tryCatch(async (req: Request, res: Response, next: NextFuncti
   return utils.responseSuccess(res, response, 'Success Update User');
 });
 
-const deleteAllUser = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
+const deleteUsers = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
   const response = await command.deleteUsers();
   return utils.responseSuccess(res, response, 'Success Delete User');
 });
 
-const deletUserById = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
+const deletUser = tryCatch(async (req: Request, res: Response, next: NextFunction) => {
   const params = req.params.userId;
   await utils.validateSchema(params, schema.checkUserId);
   const response = await command.deleteUser(params);
@@ -68,6 +68,6 @@ export default {
   register,
   login,
   updateUser,
-  deleteAllUser,
-  deletUserById,
+  deleteUsers,
+  deletUser,
 };

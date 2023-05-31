@@ -1,5 +1,6 @@
 import AppError from '../../utils/app-error.js';
 import Products from './repositories.js';
+import { ProductPage } from '../../utils/interface.js';
 
 export default class QueryProduct {
   public product = new Products();
@@ -14,11 +15,11 @@ export default class QueryProduct {
     return result;
   }
 
-  async getAllProductPagination(paylod: any) {
+  async getAllProductPagination(paylod: ProductPage) {
     const { page, limit } = paylod;
     let { name } = paylod;
-    const limitInt = parseInt(limit) || 10;
-    const pageInt = parseInt(page) | 1;
+    const limitInt = Number(limit) || 10;
+    const pageInt = Number(page) | 1;
     const pages = (page - 1) * limitInt;
     let params = {};
     if (name !== undefined) {

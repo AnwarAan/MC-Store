@@ -18,6 +18,7 @@ enum Category {
   accessories = 'accessories',
 }
 
+//Product
 export interface Product {
   _id: number;
   name: string;
@@ -48,6 +49,7 @@ export interface ProductProps {
   };
 }
 
+//Cart
 export interface Item {
   _id: string;
   product: Product;

@@ -12,9 +12,8 @@ export default class QueryCart {
     return result;
   }
 
-  async getCartByUserId(payload: any) {
-    const { userId } = payload;
-    const params = { userId: userId };
+  async getCartByUserId(userId: string) {
+    const params = { user: userId };
     const result = await this.cart.findCart(params);
     return result;
   }

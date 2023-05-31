@@ -12,7 +12,7 @@ router.post('/login', apiHandler.login);
 
 router.put('/:userId', apiHandler.updateUser);
 
-router.delete('/', apiHandler.deleteAllUser);
-router.delete('/:userId', apiHandler.deletUserById);
+router.delete('/', apiHandler.deleteUsers);
+router.delete('/:userId', apiHandler.deletUser);
 
 export default router;
