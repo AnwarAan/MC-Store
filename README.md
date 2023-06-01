@@ -1,15 +1,6 @@
 # MC Store
 
 
-## Add your files
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/wahyuwidi21/backend-pos.git
-git branch -M main
-git push -uf origin main
-```
-
 ## Clone Repo
 
 ensure you have installed nodejs
@@ -37,7 +28,18 @@ cd ./server/mc-api-store-api-v1
 npm run dev
 ```
 
+## Add your files
+
+```
+cd existing_repo
+git remote add origin https://gitlab.com/wahyuwidi21/backend-pos.git
+git branch -M main
+git push -uf origin main
+```
+
+
 ## Postman Collection
 
 I have publish postman collection for backend test
+
 -[ ][Postman Collection](https://documenter.getpostman.com/view/19585911/2s93mBvdn7)
