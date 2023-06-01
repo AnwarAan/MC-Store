@@ -40,6 +40,6 @@ git push -uf origin main
 
 ## Postman Collection
 
-I have publish postman collection for backend test
+I have publish [Postman Collection](https://documenter.getpostman.com/view/19585911/2s93mBvdn7) for backend test
 
--[ ][Postman Collection](https://documenter.getpostman.com/view/19585911/2s93mBvdn7)
+[Postman Collection](https://documenter.getpostman.com/view/19585911/2s93mBvdn7)
