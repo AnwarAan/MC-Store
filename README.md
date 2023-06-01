@@ -42,4 +42,3 @@ git push -uf origin main
 
 I have publish [Postman Collection](https://documenter.getpostman.com/view/19585911/2s93mBvdn7) for backend test
 
-[Postman Collection](https://documenter.getpostman.com/view/19585911/2s93mBvdn7)
