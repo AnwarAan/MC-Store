@@ -1,4 +1,4 @@
-* MC Store
+# MC Store
 
 
 ## Add your files
